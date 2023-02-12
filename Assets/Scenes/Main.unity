@@ -609,6 +609,7 @@ GameObject:
   - component: {fileID: 1876334197}
   - component: {fileID: 1876334201}
   - component: {fileID: 1876334202}
+  - component: {fileID: 1876334203}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -724,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c60f1b6295a94d689dfa3171341e878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 0
   jampPower: 5
   pickUpSound: {fileID: 8300000, guid: 5354d7a014fd0414684f1c7efa480c0f, type: 3}
   jumpSound: {fileID: 8300000, guid: 5619d66d39e024c449bde2b4b952cdf8, type: 3}
@@ -824,3 +825,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1876334203
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876334196}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0657fbc2fdf704e9a801faa62f7229e0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

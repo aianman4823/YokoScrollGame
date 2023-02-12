@@ -11,10 +11,13 @@ public class PlayerController : MonoBehaviour
     public AudioClip pickUpSound;
     public AudioClip jumpSound;
     AudioSource audioSource;
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
         audioSource = this.GetComponent<AudioSource>();
+        animator = this.gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -24,6 +27,25 @@ public class PlayerController : MonoBehaviour
         {
             this.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
         }
+
+        if (Input.GetKeyDown("right") == true)
+        {
+            animator.SetBool("walkRight", true);
+        }
+        if (Input.GetKeyUp("right") == true)
+        {
+            animator.SetBool("walkRight", false);
+        }
+
+        if (Input.GetKeyDown("left") == true)
+        {
+            animator.SetBool("walkLeft", true);
+        }
+        if (Input.GetKeyUp("left") == true)
+        {
+            animator.SetBool("walkLeft", false);
+        }
+
         if (Input.GetKey("left") == true)
         {
             this.transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
