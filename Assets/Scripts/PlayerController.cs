@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,9 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
     Animator animator;
 
+    bool leftMove;
+    bool rightMove;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +31,41 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("right") == true)
+        Move();
+        Animation();
+    }
+
+    void Move()
+    {
+        if (Input.GetKey("right") == true || rightMove == true)
         {
             this.transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
         }
+        if (Input.GetKey("left") == true || leftMove == true)
+        {
+            this.transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
+        }
 
+        if (Input.GetKeyDown("space") == true)
+        {
+            Jump();
+        }
+    }
+
+    public void Jump()
+    {
+        if (jumpCount < 2)
+        {
+            this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, jampPower, 0);
+            audioSource.clip = jumpSound;
+            audioSource.Play();
+            jumpCount++;
+        }
+
+    }
+
+    void Animation()
+    {
         if (Input.GetKeyDown("right") == true)
         {
             animator.SetBool("walkRight", true);
@@ -50,18 +84,6 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("walkLeft", false);
         }
 
-        if (Input.GetKey("left") == true)
-        {
-            this.transform.position -= new Vector3(speed * Time.deltaTime, 0, 0);
-        }
-
-        if (Input.GetKeyDown("space") == true && jumpCount < 2)
-        {
-            this.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, jampPower, 0);
-            audioSource.clip = jumpSound;
-            audioSource.Play();
-            jumpCount++;
-        }
     }
 
     void OnCollisionEnter(Collision col)
@@ -82,5 +104,26 @@ public class PlayerController : MonoBehaviour
             hpImage.fillAmount = currentHP / maxHP;
             Destroy(col.gameObject);
         }
+    }
+
+    public void LeftButtonDown()
+    {
+        leftMove = true;
+        animator.SetBool("walkLeft", true);
+    }
+    public void LeftButtonUp()
+    {
+        leftMove = false;
+        animator.SetBool("walkLeft", false);
+    }
+    public void RightButtonDown()
+    {
+        rightMove = true;
+        animator.SetBool("walkRight", true);
+    }
+    public void RightButtonUp()
+    {
+        rightMove = false;
+        animator.SetBool("walkRight", false);
     }
 }
