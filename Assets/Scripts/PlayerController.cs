@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    float maxHP = 5.0f;
+    float currentHP = 5.0f;
+    public Image hpImage;
     public float speed = 5.0f;
     public float jampPower = 5.0f;
     int jumpCount = 0;
@@ -70,6 +74,12 @@ public class PlayerController : MonoBehaviour
         {
             audioSource.clip = pickUpSound;
             audioSource.Play();
+            Destroy(col.gameObject);
+        }
+        if (col.gameObject.tag == "Enemy")
+        {
+            currentHP -= 1;
+            hpImage.fillAmount = currentHP / maxHP;
             Destroy(col.gameObject);
         }
     }
